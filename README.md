@@ -1,12 +1,18 @@
-# Projeto Final EBAC - Previsao de Partidas de League of Legends
+# Projeto Final EBAC - Previsão de Partidas de League of Legends
 
-Projeto final do curso de Ciencia de Dados da EBAC. O objetivo e prever se o **Blue Team** vencera uma partida de League of Legends a partir do estado do jogo aos 10 minutos.
+Projeto final do curso de **Ciência de Dados da EBAC**. O objetivo é prever se o **Blue Team** vencerá uma partida de League of Legends a partir do estado do jogo aos 10 minutos.
+
+## Acesso rápido
+
+- [Ver o notebook completo](notebooks/Projeto_Final_LoL_EBAC.ipynb)
+- [Ver a apresentação final em PDF](presentation/Apresentacao_Projeto_Final_LoL_EBAC.pdf)
+- [Acessar a base de dados](data/Base_M43_Pratique_LOL_RANKED_WIN.csv)
 
 ## Resultado principal
 
-O modelo final foi uma **Regressao Logistica com padronizacao**, selecionada por validacao cruzada e ajustada com `GridSearchCV` (`C = 0.03`). No conjunto de teste reservado, obteve:
+O modelo final foi uma **Regressão Logística com padronização**, selecionada por validação cruzada e ajustada com `GridSearchCV` (`C = 0.03`). No conjunto de teste reservado, obteve:
 
-| Metrica | Resultado |
+| Métrica | Resultado |
 |---|---:|
 | Accuracy | 71.66% |
 | Precision | 71.17% |
@@ -15,59 +21,76 @@ O modelo final foi uma **Regressao Logistica com padronizacao**, selecionada por
 | ROC-AUC | 0.8060 |
 | Log Loss | 0.5313 |
 
-Matriz de confusao: `[[700, 290], [270, 716]]`.
+Matriz de confusão: `[[700, 290], [270, 716]]`.
 
 ## Metodologia
 
 1. Entendimento do problema e auditoria da base.
-2. Analise exploratoria e verificacao de qualidade.
-3. Identificacao de redundancias matematicas entre features.
-4. Analise de ouro, experiencia, First Blood, dragoes, arautos e torres.
-5. Testes estatisticos.
-6. Split estratificado treino/teste, mantendo o teste fechado durante selecao.
-7. Baseline e comparacao de Regressao Logistica, Decision Tree, Random Forest e SVM Linear com validacao cruzada.
-8. Tuning da Regressao Logistica com `GridSearchCV`.
-9. Avaliacao unica no conjunto de teste reservado.
-10. Interpretacao dos coeficientes, confianca das previsoes, limitacoes e conclusoes.
+2. Análise exploratória e verificação de qualidade.
+3. Identificação de redundâncias matemáticas entre features.
+4. Análise de ouro, experiência, First Blood, dragões, arautos e torres.
+5. Testes estatísticos.
+6. Split estratificado treino/teste, mantendo o teste fechado durante a seleção.
+7. Baseline e comparação de Regressão Logística, Decision Tree, Random Forest e SVM Linear com validação cruzada.
+8. Tuning da Regressão Logística com `GridSearchCV`.
+9. Avaliação única no conjunto de teste reservado.
+10. Interpretação dos coeficientes, confiança das previsões, limitações e conclusões.
 
 ## Principais insights
 
-- Vantagem de ouro e experiencia no early game estao entre os sinais preditivos mais relevantes.
-- Objetivos como dragao tambem acrescentam informacao ao modelo.
-- Em 725 partidas nas quais o modelo apresentou pelo menos 80% de confianca para um dos lados, a acuracia foi de aproximadamente **89.1%**.
-- Em partidas equilibradas, com probabilidade prevista para Blue entre 40% e 60%, a acuracia caiu para aproximadamente **53.7%**, evidenciando maior incerteza.
-- As relacoes encontradas sao preditivas/associativas e nao devem ser interpretadas automaticamente como causalidade.
+- Vantagem de ouro e experiência no early game estão entre os sinais preditivos mais relevantes.
+- Objetivos como dragão também acrescentam informação ao modelo.
+- Em 725 partidas nas quais o modelo apresentou pelo menos 80% de confiança para um dos lados, a acurácia foi de aproximadamente **89.1%**.
+- Em partidas equilibradas, com probabilidade prevista para Blue entre 40% e 60%, a acurácia caiu para aproximadamente **53.7%**, evidenciando maior incerteza.
+- As relações encontradas são preditivas/associativas e não devem ser interpretadas automaticamente como causalidade.
 
-## Estrutura sugerida do repositorio
+## Tecnologias utilizadas
+
+- Python
+- Pandas
+- NumPy
+- Matplotlib
+- SciPy
+- Scikit-learn
+- Jupyter Notebook
+- Git e GitHub
+
+## Estrutura do repositório
 
 ```text
-projeto-final-lol-ebac/
-|-- README.md
-|-- requirements.txt
-|-- data/
-|   `-- Base_M43_Pratique_LOL_RANKED_WIN.csv
-|-- notebooks/
-|   `-- Projeto_Final_LoL_EBAC.ipynb
-`-- presentation/
-    `-- Apresentacao_Projeto_Final_LoL_EBAC.pdf
+projeto-final-ciencia-de-dados-lol-ebac/
+├── data/
+│   └── Base_M43_Pratique_LOL_RANKED_WIN.csv
+├── notebooks/
+│   └── Projeto_Final_LoL_EBAC.ipynb
+├── presentation/
+│   └── Apresentacao_Projeto_Final_LoL_EBAC.pdf
+├── README.md
+└── requirements.txt
 ```
 
-## Como executar
+## Como reproduzir
 
-Crie um ambiente Python, instale as dependencias e abra o notebook em Jupyter Notebook, JupyterLab, VS Code ou Google Colab.
+Clone o repositório e instale as dependências:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-O notebook procura o CSV na pasta atual, em `../data/` e no caminho usado durante a geracao do projeto. Para o repositorio GitHub, mantenha o notebook em `notebooks/` e o CSV em `data/`.
+Em seguida, abra:
 
-## Limitacoes
+```text
+notebooks/Projeto_Final_LoL_EBAC.ipynb
+```
 
-A base representa um recorte especifico de partidas e nao inclui todas as informacoes que poderiam afetar o resultado, como composicao completa de campeoes, habilidade individual, historico dos jogadores ou a evolucao temporal depois do snapshot. Mudancas de patch/meta podem gerar drift e exigiriam revalidacao em um uso de producao.
+O notebook procura automaticamente a base em `../data/` quando executado a partir da pasta `notebooks`.
+
+## Limitações
+
+A base representa um recorte específico de partidas e não inclui todas as informações que poderiam afetar o resultado, como composição completa de campeões, habilidade individual, histórico dos jogadores ou a evolução temporal depois do snapshot. Mudanças de patch/meta podem gerar drift e exigiriam revalidação em um uso de produção.
 
 ## Arquivos de entrega
 
-- `Projeto_Final_LoL_EBAC.ipynb`: analise tecnica reproduzivel.
-- `Apresentacao_Projeto_Final_LoL_EBAC.pdf`: apresentacao executiva do projeto.
+- `Projeto_Final_LoL_EBAC.ipynb`: análise técnica reproduzível.
+- `Apresentacao_Projeto_Final_LoL_EBAC.pdf`: apresentação executiva do projeto.
 - `Base_M43_Pratique_LOL_RANKED_WIN.csv`: base utilizada.
